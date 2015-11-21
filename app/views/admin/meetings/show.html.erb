@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @meeting.name %>
+</p>
+
+<p>
+  <strong>Read:</strong>
+  <%= @meeting.phone %>
+</p>
+
+<%= link_to 'Bearbeiten', edit_admin_meeting_path(@meeting) %> |
+<%= link_to 'Zurück', admin_meetings_path %>

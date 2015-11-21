@@ -1,0 +1,60 @@
+<%= simple_form_for([:admin, @meeting]) do |f| %>
+  <% if @meeting.errors.any? %>
+    <% @meeting.errors.each do |error| -%>
+      <%#= error.inspect %>
+    <% end -%>
+    
+    
+    <p><%= @meeting.errors.full_messages_for(:time) %></p>
+    
+  <% end %>
+
+  <div class="row">
+    <div class="medium-6 columns">
+      <%= f.input :name %>
+    </div>
+    <div class="medium-6 columns">
+      <%= f.input :phone %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="medium-6 columns">
+      <%= f.input :email %>
+    </div>
+    <div class="medium-6 columns">
+      <%= f.label :accepted, 'Bestätigt?'%>
+      <%= f.input :accepted, label: false %>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="medium-12 columns">
+      <%= f.input :start_time %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="medium-12 columns">
+      <%= f.input :end_time %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="medium-6 columns">
+      <%= f.collection_check_boxes(:alley_ids, Alley.active, :id, :name) %>
+    </div>
+    <div class="medium-6 columns">
+      <%= f.input :note, label: 'Bemerkung' %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="medium-6 columns">
+      <%= f.label :ignore_non_accepted, 'Trotzdem speichern' %>
+      <%= f.check_box :ignore_non_accepted, label: 'Trotzdem speichern' %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="medium-12 columns">
+      <%= f.submit 'Speichern', class: 'button small success' %>
+      <%= link_to 'Abbrechen', admin_meetings_path, class: 'button small alert' %>
+    </div>
+  </div>
+<% end %>

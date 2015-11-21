@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h5>Termin</h5>
+
+<%= link_to 'Neuer Termin', new_admin_meeting_path %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Datum</th>
+      <th>Uhrzeit/Bahnen</th>
+      <th>Name</th>
+      <th>Tel.</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @meetings.each do |meeting| %>
+      <tr class="<%= meeting.accepted == true ? 'accepted' : 'unaccepted' %>">
+        <td><%= meeting.start_time.strftime('%d.%m.%Y') %></td>
+        <td>
+          <%= meeting.start_time.strftime('%H:%M') %> -
+          <%= meeting.end_time.strftime('%H:%M') %>
+          / <%= meeting.alleys.count %>
+        </td>
+        <td><%= meeting.name %></td>
+        <td><%= meeting.phone %></td>
+        <td><%= link_to 'Zeigen', [:admin, meeting] %></td>
+        <td><%= link_to 'Bearbeiten', edit_admin_meeting_path(meeting) %></td>
+        <td><%= link_to 'Löschen', [:admin, meeting], method: :delete, data: { confirm: 'Wirklich löschen?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
